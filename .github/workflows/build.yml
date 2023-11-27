@@ -35,10 +35,17 @@ jobs:
         run: |
           curl https://github.com/conan-io/conan/releases/download/2.0.14/conan-win-64.zip -L -O &&^
           7z x conan-win-64.zip -o"conan-win-64"
-          
+
+ # conan search "*" --table=file.html -q "arch=x86_64 AND build_type=Release AND os=Windows" -r=conancenter
+ 
       - shell: cmd
         run: |
           cd conan-win-64 &&^
-          conan search * -r=conancenter
-          
-# conan search "*" --table=file.html -q "arch=x86_64 AND build_type=Release AND os=Windows" -r=conancenter
+          conan search * -r=conancenter > output.txt
+        
+      - name: Release prebuilt
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "conan-win-64/output.txt"
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}
