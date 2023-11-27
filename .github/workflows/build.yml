@@ -39,4 +39,6 @@ jobs:
       - shell: cmd
         run: |
           cd conan-win-64 &&^
-          conan search "*" --table=file.html -q "arch=x86_64 AND build_type=Release AND os=Windows" -r=conancenter
+          conan search * -r=conancenter
+          
+# conan search "*" --table=file.html -q "arch=x86_64 AND build_type=Release AND os=Windows" -r=conancenter
