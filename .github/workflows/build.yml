@@ -32,4 +32,4 @@ jobs:
       - uses: actions/checkout@v4
 
       - shell: cmd
-        run: conan search * -r conan-center
+        run: conan search "*" --table=file.html -q "arch=x86_64 AND build_type=Release AND os=Windows" -r=conancenter
